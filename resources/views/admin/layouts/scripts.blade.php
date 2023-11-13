@@ -19,6 +19,11 @@
     <script src="admin/assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">  --}}
+
+    <!-- Bootstrap JavaScript and Popper.js (required for Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 @yield('scripts')

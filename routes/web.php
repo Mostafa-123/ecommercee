@@ -19,7 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class,'index']);
 Route::Post('/logouts',[HomeController::class,'logout'])->name('logouts');
 Route::get('/categories',[CategoryController::class,'index'])->name('categories');
-Route::post('/categories/create',[CategoryController::class,'create'])->name('categories_create');
+Route::post('/category/store',[CategoryController::class,'store'])->name('categories_store');
+Route::post('/category/update/{id}',[CategoryController::class,'update'])->name('categories_update');
+Route::get('/category/edit/{id}',[CategoryController::class,'edit'])->name('categories_edit');
+
 
 
 
