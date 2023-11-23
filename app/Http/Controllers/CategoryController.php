@@ -2,25 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CategoryDataTable;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 class CategoryController extends Controller
 {
-    public function index(Request $request)
+    public function index(CategoryDataTable $dataTable)
     {
-        $categories = Category::select('id', 'name')->get();
 
-        if ($request->ajax()) {
-            return DataTables::of($categories)
-                ->addColumn('actions', function ($row) {
-                    return '<a href="javascript:void(0)" class="btn btn-info edit_btn" data-id="' . $row->id . '">Edit</a><a href="javascript:void(0)" class="btn btn-danger delete_btn" data-id="' . $row->id . '">Delete</a>';
-                })
-                ->rawColumns(['actions'])
-                ->make(true);
-        }
-
-        return view('admin.categories.index', compact("categories"));
+        return $dataTable->render('admin.categories.index');
     }
 
     public function store(Request $request){
@@ -34,7 +25,7 @@ class CategoryController extends Controller
                 $category->save();
             return [
                 'category'=> $category,
-                'status'=>200,
+                'status'=>true,
                 'message'=>'updated successfuly'
         ];
             }else{
@@ -49,7 +40,7 @@ class CategoryController extends Controller
         ]);
         return [
             'category'=> $category,
-            'status'=>200,
+            'status'=>true,
             'message'=>'saved successfuly'
     ];
         }
@@ -80,6 +71,16 @@ class CategoryController extends Controller
             return abort(404);
         }
 
+    }
+    public function delete($id)
+    {
+
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return response()->json([
+            'status'=>true,
+            'message'=> 'deleted successfully'
+        ]);
     }
 
 }
